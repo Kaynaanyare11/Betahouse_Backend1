@@ -35,11 +35,11 @@ const homeSchema = new Schema({
     required: true
   },
   Rooms: {
-    type: Number,
+    type: String,
     required: true
   },
   Pathrooms: {
-    type: Number,
+    type: String,
     required: true
   },
   Owner: {
