@@ -65,7 +65,12 @@ const PutGalary = async (req, res, next) => {
     return next(error)
   }
 }
+const DeleteGallery = async (req, res) => {
+  const deletingById = await GalaryModel.findByIdAndRemove(req.params.id)
+  res.send({ status: 'Success', message: `this House ${deletingById} Deleted successfully` })
+}
 exports.getGalaryById = getGalaryById
 exports.createGalary = createGalary
 exports.getGalary = getGalary
 exports.PutGalary = PutGalary
+exports.DeleteGallery = DeleteGallery

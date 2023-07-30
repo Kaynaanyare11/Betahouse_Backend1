@@ -7,5 +7,6 @@ router.get('/', GalaryControllers.getGalary)
 router.get('/:id', GalaryControllers.getGalaryById)
 router.post('/', GalaryControllers.createGalary)
 router.put('/:id', GalaryControllers.PutGalary)
+router.delete('/:id', GalaryControllers.DeleteGallery)
 
 module.exports = router
