@@ -5,7 +5,8 @@ const ServiceControllers = require('../controller/ServicesControlller');
 /* GET home page. */
 router.get('/',ServiceControllers.getService);
 router.post('/',ServiceControllers.createService);
-router.get('/',ServiceControllers.getServiceById);
-router.put('/',ServiceControllers.PutService);
+router.get('/:id',ServiceControllers.getServiceById);
+router.put('/:id',ServiceControllers.PutService);
+router.put('/:id',ServiceControllers.DeleteService);
 
 module.exports = router;

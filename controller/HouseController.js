@@ -70,7 +70,12 @@ const PutHouse = async (req, res, next) => {
     return next(error)
   }
 }
+const DeleteHouse = async (req, res) => {
+  const deletingById = await HouseModel.findByIdAndRemove(req.params.id)
+  res.send({ status: 'Success', message: `this House ${deletingById} Deleted successfully` })
+}
 exports.getHouseById = getHouseById
 exports.createHouse = createHouse
 exports.getHouses = getHouses
 exports.PutHouse = PutHouse
+exports.DeleteHouse = DeleteHouse

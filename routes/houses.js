@@ -6,5 +6,6 @@ const housesControllers = require('../controller/HouseController')
 router.get('/', housesControllers.getHouses)
 router.post('/', housesControllers.createHouse)
 router.put('/:id', housesControllers.PutHouse)
+router.delete('/:id', housesControllers.DeleteHouse)
 
 module.exports = router

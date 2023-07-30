@@ -68,7 +68,12 @@ const PutImages = async (req, res, next) => {
     return next(error)
   }
 }
+const DeleteImages = async (req, res) => {
+  const deletingById = await ImagesModel.findByIdAndRemove(req.params.id)
+  res.send({ status: 'Success', message: `this House ${deletingById} Deleted successfully` })
+}
 exports.getImagesById = getImagesById
 exports.createImages = createImages
 exports.getImages = getImages
 exports.PutImages = PutImages
+exports.DeleteImages = DeleteImages
