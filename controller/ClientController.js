@@ -67,7 +67,7 @@ const PutClient = async (req, res, next) => {
 }
 const DeleteClient = async (req, res) => {
   const deletingById = await ClientModel.findByIdAndRemove(req.params.id)
-  res.send({ status: 'Success', message: `this House ${deletingById} Deleted successfully` })
+  res.send({ status: 'Success', message: `this Client ${deletingById} Deleted successfully` })
 }
 exports.getClientById = getClientById
 exports.createClient = createClient
