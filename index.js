@@ -13,7 +13,7 @@ const cors = require('cors')
 
 const app = express()
 app.use(express.json())
-app.use(cors({origin:'http://localhost:5173'}))
+app.use(cors({origin:'http://localhost:5173',origin:'https://betahouse-front-end.vercel.app/'}))
 mongoose.set('strictQuery', false)
 mongoose.connect(process.env.DB_URL).then(() => {
   console.log('Connected!')
