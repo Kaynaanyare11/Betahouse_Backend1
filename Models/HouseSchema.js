@@ -45,12 +45,12 @@ const homeSchema = new Schema({
   Owner: {
     type: String,
     required: true
-  },
-  creatorID: {
-    type: mongoose.Types.ObjectId,
-    ref: 'User',
-    required: true
   }
+  // creatorID: {
+  //   type: mongoose.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true
+  // }
 })
 
 function HouseValidate (PayObj) {
@@ -66,7 +66,7 @@ function HouseValidate (PayObj) {
     Rooms: joi.string().required(),
     Pathrooms: joi.string().required(),
     Owner: joi.string().required(),
-    creatorID: joi.string().required()
+    // creatorID: joi.string().required()
 
   })
   return houseval.validate(PayObj)
