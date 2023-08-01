@@ -1,4 +1,4 @@
-const { ClientModel, ClientValidate } = require('../Models/HomePageSetting/ClientSchema')
+const { ClientModel, ClientValidate } = require('../Models/ClientSchema')
 const HttpError = require('../Models/http-error')
 const getClient = async (req, res, next) => {
   let Client

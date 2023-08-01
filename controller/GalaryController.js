@@ -1,4 +1,4 @@
-const { GalaryModel, GalaryValidate } = require('../Models/HomePageSetting/GalarySchema')
+const { GalaryModel, GalaryValidate } = require('../Models/GalarySchema')
 const HttpError = require('../Models/http-error')
 const getGalary = async (req, res, next) => {
   let Galary

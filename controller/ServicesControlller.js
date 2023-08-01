@@ -1,7 +1,7 @@
 const {
   ServiseModel,
   ServiseValidate
-} = require('../Models/HomePageSetting/ServisesSchema')
+} = require('../Models/ServisesSchema')
 const HttpError = require('../Models/http-error')
 const getService = async (req, res, next) => {
   let Service
