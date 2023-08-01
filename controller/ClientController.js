@@ -13,7 +13,7 @@ const getClient = async (req, res, next) => {
   res.status(200).json({ Client: Client.map(Client => Client.toObject({ getters: true })) })
 }
 const getClientById = async (req, res, next) => {
-  const ClientId = req.params._id // { pid: 'p1' }
+  const ClientId = req.params._id 
   let Client
   try {
     Client = await ClientModel.findById(ClientId).exec()
@@ -28,7 +28,7 @@ const getClientById = async (req, res, next) => {
     return res.status(200).send('Client Not Found')
   }
 
-  res.json({ Client: Client.toObject({ getters: true }) }) // => { place } => { place: place }
+  res.json({ Client: Client.toObject({ getters: true }) })
 }
 
 const createClient = async (req, res, next) => {
