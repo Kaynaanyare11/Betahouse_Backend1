@@ -6,6 +6,5 @@ const AboutController = require('../controller/AboutController')
 router.get('/', AboutController.getAbout)
 router.get('/:id', AboutController.getAboutById)
 router.post('/', AboutController.createAbout)
-router.put('/:id', AboutController.PutAbout)
 
 module.exports = router

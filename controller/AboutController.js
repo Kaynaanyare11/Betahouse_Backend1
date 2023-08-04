@@ -35,45 +35,37 @@ const getAboutById = async (req, res, next) => {
 
 
 //create a new record
-const createAbout = async (req, res, next) => {
+const createAbout = async(req,res)=>{
   try {
-
-    //Validation 
     const { error } = AboutValidate(req.body)
-    if (error) return res.send(error.message)
-    const About = new AboutModel(req.body)
-    res.status(201).send({
-      status: 'Success',
-      message: 'New Post Added Successfully',
-      info: About
-    })
-    await About.save()
-  } catch (err) {
-    const error = new HttpError(
-      'Creating About Failed.'
-    )
-    return next(error)
-  }
-}
+  if(error) 
+     return   res.status(301).send(error.message)
 
-//update 
-const PutAbout = async (req, res, next) => {
-  try {
-    const About = await AboutModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-
-    res.status(200).send({
-      status: 'Success',
-      message: 'Successfully Updated',
-      info: About
-    })
-  } catch (err) {
-    const error = new HttpError(
-      'Updating About Failed.'
-    )
-    return next(error)
+      const About=await AboutModel.find().sort({_id: -1}).limit(1)
+      if(About){
+          const updates= await AboutModel.findByIdAndUpdate(About[0]._id,{
+             
+            FewDescription:req.body.FewDescription,
+            MoreDescription:req.body.MoreDescription
+          },{new:true})
+          res.status(200).send({updates})
+      }
+      else{
+         
+          const Aboutpos= new AboutModel(req.body) 
+          await Aboutpos.save();
+          res.status(200).send({status:true, message:"New About Successfully Posted",Aboutpos:Aboutpos})
+          //    catch (error) {
+          //       res.status(400).send(error.message)
+          //   }
+      }
   }
-}
+   catch (error) {
+      res.status(400).send(error.message)
+  }
+    
+  }
+
 exports.getAboutById = getAboutById
 exports.createAbout = createAbout
 exports.getAbout = getAbout
-exports.PutAbout = PutAbout
