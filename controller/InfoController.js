@@ -14,7 +14,7 @@ const getInfo = async (req, res, next) => {
   }
   res
     .status(200)
-    .json({Info:Info})
+    .json(Info)
 }
 
 // creating a new Info
