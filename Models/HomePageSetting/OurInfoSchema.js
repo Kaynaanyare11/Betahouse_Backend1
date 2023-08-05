@@ -42,8 +42,25 @@ const InfoSchema = new Schema({
   twitter: {
     type: String,
     required: true
-  }
-})
+  },
+  HeroSectionTitle: {
+      type: String,
+      required: false,
+    },
+    HeroSectionDescription: {
+      type: String,
+      required: false,
+    },
+    HeroImage: {
+      type: String,
+      required: false,
+    },
+    FooterText:{
+      type: String,
+      required: false,
+
+    }
+  })
 function InfoValidate (PayObj) {
   const Infoval = joi.object({
     email: joi.string().email().required(),
@@ -54,7 +71,11 @@ function InfoValidate (PayObj) {
     facebook: joi.string().required(),
     tiktok: joi.string().required(),
     instagram: joi.string().required(),
-    twitter: joi.string().required()
+    twitter: joi.string().required(),
+    HeroSectionTitle: joi.string().required(),
+    HeroSectionDescription: joi.string().required(),
+    HeroImage: joi.string().required(),
+    FooterText: joi.string().required()
   })
   return Infoval.validate(PayObj)
 }

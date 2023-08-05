@@ -9,7 +9,6 @@ const GalaryRouter = require('./routes/Galary')
 const ClientRouter = require('./routes/Client')
 const ServiseRouter = require('./routes/Services')
 const AboutRouter = require('./routes/About')
-const HomePageStaticPartsRouter = require('./routes/HomePageStaticPart')
 const cors = require('cors')
 
 const app = express()
@@ -33,7 +32,6 @@ app.use('/gallery', GalaryRouter)
 app.use('/client', ClientRouter)
 app.use('/service', ServiseRouter)
 app.use('/about', AboutRouter)
-app.use('/herosection&footer', HomePageStaticPartsRouter)
 
 // const connectiondb = async () => {
 //   const createServer = await MongoMemoryServer.create()

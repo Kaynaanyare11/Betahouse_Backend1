@@ -1,7 +1,7 @@
 const {
   InfoModel,
   InfoValidate
-} = require('../Models/HomePageSetting/StaticPartsHomePageSchema')
+} = require('../Models/HomePageSetting/OurInfoSchema')
 const HttpError = require('../Models/http-error')
 // Get All Info
 const getInfo = async (req, res, next) => {
@@ -14,42 +14,35 @@ const getInfo = async (req, res, next) => {
   }
   res
     .status(200)
-    .json({ Info: Info.map((Info) => Info.toObject({ getters: true })) })
+    .json(Info)
 }
 
 // creating a new Info
-const createInfo = async (req, res, next) => {
+const createInfo = async(req,res)=>{
   try {
     const { error } = InfoValidate(req.body)
-    if (error) return res.send(error.message)
-    const Info = new InfoModel(req.body)
-    res.send({
-      status: 'Success',
-      message: 'New Post Added Successfully',
-      info: Info
-    })
-    await Info.save()
-  } catch (err) {
-    const error = new HttpError('Creating New Information Failed.')
-    return next(error)
-  }
-}
-const PutInfo = async (req, res, next) => {
-  try {
-    const Info = await InfoModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true
-    })
+  if(error) 
+     return   res.status(301).send(error.message)
 
-    res.status(200).send({
-      status: 'Success',
-      message: 'Successfully Updated',
-      info: Info
-    })
-  } catch (err) {
-    const error = new HttpError('Updating Info Failed.')
-    return next(error)
+     const Infor = await InfoModel.find().sort({_id: -1 }).limit(1)
+      if(Infor){
+        await InfoModel.findByIdAndUpdate(Infor[0]._id, req.body, { new: true });
+        res.status(201).send({ status: true, message: 'successfully updated' });
+      }
+      else{
+         
+          const Infopos= new InfoModel(req.body) 
+          await Infopos.save();
+          res.status(200).send({status:true, message:"New About Successfully Posted",Infopos:Infopos})
+          //    catch (error) {
+          //       res.status(400).send(error.message)
+          //   }
+      }
   }
-}
+   catch (error) {
+      res.status(400).send(error.message)
+  }
+    
+  }
 exports.createInfo = createInfo
 exports.getInfo = getInfo
-exports.PutInfo = PutInfo
