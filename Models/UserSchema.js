@@ -21,7 +21,10 @@ const userSchema = new Schema({
     },
     Status:{
         type:String, 
-        required:true
+        required:true,
+        default:'Active',
+        enum:['Active', 'Blocked','Suspended']
+
     },
 });
 function UserValidate(PayObj) {
@@ -36,10 +39,20 @@ function UserValidate(PayObj) {
     return Userval.validate(PayObj)
 }
 
+function LoginValidate(PayObj) {
+    let Userval = joi.object({
+        email: joi.string().email().required(),
+        password: joi.string().required(),
+
+    })
+    return Userval.validate(PayObj)
+}
 const UserModel=new mongoose.model('User',userSchema)
 
 module.exports={
     UserModel,
-    UserValidate
+    UserValidate,
+    LoginValidate
+
 }
 // module.exports = mongoose.model({'User',userSchema})

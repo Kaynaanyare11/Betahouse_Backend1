@@ -9,7 +9,10 @@ const GalaryRouter = require('./routes/Galary')
 const ClientRouter = require('./routes/Client')
 const ServiseRouter = require('./routes/Services')
 const AboutRouter = require('./routes/About')
+const Login =require('./routes/Login-Route')
+const AuthenticateRoute = require('./routes/AuthenticationMiddleware')
 const cors = require('cors')
+
 
 const app = express()
 app.use(express.json())
@@ -24,6 +27,9 @@ mongoose.connect(process.env.DB_URL).then(() => {
 app.get('/', (req, res) => {
   res.json('hi')
 })
+
+
+app.use('/login',Login)
 app.use('/houses', housesRouter)
 app.use('/users', usersRouter)
 app.use('/images', ImagesRouter)

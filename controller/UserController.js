@@ -18,17 +18,11 @@ const getUsers = async (req, res, next) => {
 
 const signup = async (req, res, next) => {
   const password = req.body.password
-  // let existingUser;
-  // try {
-  //   existingUser = await UserModel.findOne({ email: email });
-  // } catch (err) {
-  //     return res.send(err.message);
-  // }
-
-  // if (existingUser) {
-  //     return res.send(err.message);
-  // }
-
+// let UserExsists = await UserModel.findOne(req.body.email)
+//   if(UserExsists)
+//   {
+//     return res.send("This User already exists")
+//   }
   let hashedPassword
   try {
     hashedPassword = await bcrypt.hash(password, 12)
@@ -36,13 +30,15 @@ const signup = async (req, res, next) => {
     return res.send(err.message)
   }
 
-  const createdUser = new UserModel({
-    name: req.body.name,
-    email: req.body.email,
-    password: hashedPassword,
-    Roles: req.body.Roles,
-    Status: req.body.Status
-  })
+  const createdUser = new UserModel(
+    {
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword,
+      Roles: req.body.Roles,
+      Status: req.body.Status
+    }
+  )
 
   try {
     await createdUser.save()
@@ -54,5 +50,11 @@ const signup = async (req, res, next) => {
   res.status(201).send(createdUser)
 }
 
+const DeleteUser = async (req, res) => {
+  const deletingById = await UserModel.findByIdAndRemove(req.params.id)
+  res.send({ status: 'Success', message: `${deletingById.name} Deleted successfully` })
+}
+
 exports.getUsers = getUsers
 exports.signup = signup
+exports.DeleteUser = DeleteUser
