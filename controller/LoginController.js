@@ -13,7 +13,7 @@ const Login = async (req, res) =>{
     const CheckPassword = await bcrypt.compare(req.body.password,user.password)
     if(!CheckPassword) return res.status(404).send({Error:'Invalid password'});
 
-    const token = jwt.sign({email:user.email,id:user._id},process.env.SecretKey,{expiresIn:'1h'})
+    const token = jwt.sign({email:user.email,id:user._id},{SecretKey:'somalia'},{expiresIn:'1h'})
 
     return res.status(200).send({Token:token,User:user.name +' '+'Loged in'})
     } catch (error) {
